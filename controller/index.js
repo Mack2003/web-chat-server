@@ -5,7 +5,7 @@ const server = require('http').createServer(app);
 const bodyPerser = require('body-parser')
 const io = require('socket.io')(server, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: '*',
     },
 });
 const userPath = require('../routes/users');
@@ -13,7 +13,7 @@ const userPath = require('../routes/users');
 
 // Apply CORS middleware to entire Express app
 app.use(cors({
-    "origin": "http://localhost:3000",
+    "origin": "*",
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "preflightContinue": true,
     "optionsSuccessStatus": 204
