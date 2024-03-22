@@ -131,6 +131,7 @@ userPath.post('/profileimage', upload.single('profile-image'), async (req, res) 
 
 
 userPath.get('/profileimage/:imageName', async (req, res) => {
+    console.log(req.params.imageName)
     let imageURL;
     try {
         imageURL =  await userProfileModule.findById(req.params.imageName)
