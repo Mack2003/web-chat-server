@@ -125,7 +125,7 @@ userPath.post('/profileimage', upload.single('profile-image'), async (req, res) 
     });
 
     deleteImageUser.profileImage = `http://localhost:4000/users/profileimage/${req.file.filename}`
-    res.redirect('http://localhost:3000/user');
+    res.redirect('https://65fd49011fd3fef2ff5bafd5--visionary-maamoul-62cc8f.netlify.app/');
 
 });
 
