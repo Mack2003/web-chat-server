@@ -4,7 +4,7 @@
   "description": "practice porpuse for \"practice-2\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx nodemon controller/index"
   },
   "author": "Moloy Roy",
   "license": "ISC",

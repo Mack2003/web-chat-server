@@ -34,6 +34,15 @@ const schema2= new mongoos.Schema({
     
 },{timestamps:true})
 
+const massage = new mongoos.Schema({
+    massage: {
+        type: String,
+    },
+    side: {
+        type: String,
+    },
+}, {timestamps: true})
 
 
-module.exports={schema2}
+
+module.exports={schema2, massage}

@@ -1,10 +1,12 @@
 const express = require('express')
 const userPath = express.Router()
-const { schema2 } = require('../module/mainModule')
+const { schema2, massage } = require('../module/mainModule')
 const path = require('path')
 const { default: mongoose } = require('mongoose')
 const multer = require('multer')
 const fs = require('fs')
+
+const serverURL = "https://web-chat-server-akvt.onrender.com"
 
 
 let userProfileModule = mongoose.model('user', schema2)
@@ -115,7 +117,7 @@ userPath.get('/searchfriend/:name', async (req, res) => {
 
 userPath.post('/profileimage', upload.single('profile-image'), async (req, res) => {
     try {
-    await userProfileModule.findByIdAndUpdate(req.body.id, { profileImage: `http://localhost:4000/users/profileimage/${req.file.filename}` })
+    await userProfileModule.findByIdAndUpdate(req.body.id, { profileImage: `${serverURL}/users/profileimage/${req.file.filename}` })
         
     } catch (error) {
         console.log(error)
@@ -124,14 +126,13 @@ userPath.post('/profileimage', upload.single('profile-image'), async (req, res) 
         return data.id==req.body.id
     });
 
-    deleteImageUser.profileImage = `http://localhost:4000/users/profileimage/${req.file.filename}`
-    res.redirect('https://65fd49011fd3fef2ff5bafd5--visionary-maamoul-62cc8f.netlify.app/');
+    deleteImageUser.profileImage = `${serverURL}/users/profileimage/${req.file.filename}`
+    res.redirect('https://webchattaldi.netlify.app/');
 
 });
 
 
 userPath.get('/profileimage/:imageName', async (req, res) => {
-    console.log(req.params.imageName)
     let imageURL;
     try {
         imageURL =  await userProfileModule.findById(req.params.imageName)
@@ -162,5 +163,11 @@ userPath.delete('/profileimage/:id', async (req, res) => {
     res.header(200).json({ status: true, data: 'Profile picture removed successfully' })
     return;
 })
+
+userPath.get('/chatMassage/:chatID', async (req, res) => {
+    const chatMassageSchema =  mongoose.model(req.params.chatID, massage);
+    const massages = await chatMassageSchema.find({}).catch(err => console.log(err));
+    res.header(200).json(massages)
+});
 
 module.exports = userPath;
