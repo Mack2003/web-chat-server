@@ -6,7 +6,7 @@ const { default: mongoose } = require('mongoose')
 const multer = require('multer')
 const fs = require('fs')
 
-const serverURL = "https://web-chat-server-akvt.onrender.com"
+const serverURL = "http://localhost:4000"
 
 
 let userProfileModule = mongoose.model('user', schema2)
@@ -127,7 +127,7 @@ userPath.post('/profileimage', upload.single('profile-image'), async (req, res) 
     });
 
     deleteImageUser.profileImage = `${serverURL}/users/profileimage/${req.file.filename}`
-    res.redirect('https://webchattaldi.netlify.app/');
+    res.redirect('https://localhost:3000');
 
 });
 
@@ -155,7 +155,7 @@ userPath.delete('/profileimage/:id', async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-    let filename = user.profileImage.split('/')
+    let filename = user.profileImage.split('/');
     filename = filename[filename.length-1]
     fs.unlink(path.join(__dirname, `../User_Profile_Images/${filename}`), err => err? console.log(err): '')
     user.profileImage= '';
