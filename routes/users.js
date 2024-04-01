@@ -6,7 +6,7 @@ const { default: mongoose } = require('mongoose')
 const multer = require('multer')
 const fs = require('fs')
 
-const serverURL = "http://localhost:4000"
+const serverURL = "https://web-chat-server-akvt.onrender.com"
 
 
 let userProfileModule = mongoose.model('user', schema2)
@@ -127,7 +127,7 @@ userPath.post('/profileimage', upload.single('profile-image'), async (req, res) 
     });
 
     deleteImageUser.profileImage = `${serverURL}/users/profileimage/${req.file.filename}`
-    res.redirect('https://localhost:3000');
+    res.redirect('https://webchatdemo.netlify.app/');
 
 });
 
